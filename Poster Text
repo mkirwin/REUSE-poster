@@ -1,0 +1,58 @@
+Software Architecture: 
+	DEFINITION: the “fundamental organization of a system embodied in its components, their relations to each other, and the environment”
+
+
+	Module View
+
+		MODULE DEFINITION: Aggregatable and decomposable implementation entities that have responsibilities + features/properties.
+		* Principal implementation units that have responsibilities and functions. They are de/composable. (x)
+		* How a system's source code is decomposed into units
+		* often determine how changes to one part of a system might affect other parts and hence the ability of a system to support modifiability, portability, and reuse. 
+		----> what it's good for
+		* Explaining functionality of a system + structure of code base
+		* Analysis
+
+	Component and Connector View
+		Components and Connectors: elements that have some runtimme preesence, such as processes, objects, clients, servers, and datastores.
+		* Connectors = pathways of interactions: communication links, protocols, information flows, and access to shared storage. 
+		* Ports = interfaces of components that define specific points of potential interaction of a component with its environment.
+
+		* Box-and-line diagrams depicting CnC View are often the graphical medium of choice as a principal first-look explanation of the architecture system.  ---> Trinity makes it an outline AND the code base itself. 
+		---> what it's for
+		* showing how the system works
+		* guiding development by specifying the structure and behavior of runtime elements
+		* Helping architects and others reason  about runtime system quality attributes, such as performance, reliability, and availability. 
+
+		* How can the system's structure change as it executes?
+		*** BUT TRINITY DOES THIS MORE RIGOROUSLY *** 
+
+
+	Deployment View
+		DEFINITION: a mapping between between software elements and nonsoftware elements in the former's environment.
+
+
+The Problem: 
+
+
+Past Approaches
+	ADLs
+		* Based on analysis
+			- Wyvern/Trinity offers conformance (complementary)
+
+	ArchJava
+		* No support for distributed systems (only one JVM)
+
+
+Design
+	* Architecture as a prescriptive rather than descriptive notion
+	* Previously loose architecture concepts will be actual runtime entities. 
+
+	---> Maybe general description
+	
+	---> Demonstrated principles
+	* 
+
+
+Example
+	* Code Snippet
+	* Architecture Diagram
