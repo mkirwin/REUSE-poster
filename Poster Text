@@ -32,6 +32,10 @@ Software Architecture:
 
 
 The Problem: 
+	System designers often express and reason about the design of a distributed system using architecture diagrams, showing the nodes of computation in the system and the connections between them. However, when the system is implemented, this level of design is lost, and it can be difficult to see whether the implemented system matches the architecture or to trace parts of the source code to the archtectural features they implement. In this project, the REU-SE student will participate in the design and prototyping of an approach that makes the architectural description a "live" element of the system, so that adding a node or connection to a machine-readable architectural description results in the run-time creation of that node or that connection. A capability-based resource access model will be used to enforce that nodes only access the network through connections defined in the architecture.
+
+	EXTRACT: 
+	It is hard to determine whether the logical relationships between entities in architecture diagrams are present in system implementations. 
 
 
 Past Approaches
@@ -39,8 +43,23 @@ Past Approaches
 		* Based on analysis
 			- Wyvern/Trinity offers conformance (complementary)
 
+
+		* "Formal notation"; most formal mainstream notation of SWA
+		* Description: Only describes architecture, does not enforce code conformance to the architecture it describes. 
+		* ACME: analyses of architectures in aerospace domain
+
 	ArchJava
 		* No support for distributed systems (only one JVM)
+		* No support for multiple view
+		* Does not do anything interesting with the module view, like architecture checks
+
+
+Trinity's Approach
+	* Make software architecture a "live" component of Trinity sytems.
+	* Trinity enforced architecture conformance complements ADL analyses.
+	* Directly translate the conceptual entities from SWA views into code-enforced constructs. 
+	* Support for architecture conformance in distributed systems.
+
 
 
 Design
@@ -48,11 +67,36 @@ Design
 	* Previously loose architecture concepts will be actual runtime entities. 
 
 	---> Maybe general description
+	component: runtime entities that may interact with with other components through ports.
+	ports: component access points that enable interaction with other components.
+	connectors: interaction pathways that join two compatible component ports (definition from SWA book?)
 	
 	---> Demonstrated principles
-	* 
+	* Readability
+	* Reuse and Adaptability
+	* Commmunication Integrity, especially in distributed systems.
 
 
 Example
 	* Code Snippet
+
+	component Client
+	port getInfo: requires CSIface
+component Server
+	port sendInfo: provides CSIface
+external component DB
+	port dbIface: target DBModule
+connector JDBCCtr
+	val connectionString: String
+	architecture 
+		components
+			RequestHandler ch
+			DB db
+		connectors 
+			JDBCCtr jdbcCtr
+		attachments	
+			connect rh.dbIface and db.dbIface 			with jdbcCtr
+		bindings 
+			sendInfo is rh.sendInfo
+
 	* Architecture Diagram
